@@ -52,14 +52,6 @@ class MainActivity : ComponentActivity() {
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Image(
-                        modifier = Modifier
-                            .size(dimensionResource(id = R.dimen.image_size))
-                            .padding(dimensionResource(id = R.dimen.padding_small)),
-                        painter = painterResource(androidx.core.R.drawable.notification_bg),
-
-                        contentDescription = null
-                    )
                     Text(
                         text = "GPS Attendance",
                         style = MaterialTheme.typography.displayLarge
