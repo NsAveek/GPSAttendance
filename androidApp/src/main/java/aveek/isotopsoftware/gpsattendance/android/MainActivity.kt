@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +23,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -29,7 +35,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import aveek.isotopsoftware.gpsattendance.android.ui.theme.GPSAttendanceTheme
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.LoginScreen
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.RegistrationScreen
+import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendanceTheme
+import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,24 +82,20 @@ fun CoreScreen(insets: PaddingValues,theme: Boolean, modifier: Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        extracted()
+        val interactionSource = remember { MutableInteractionSource() }
+        val isRegistrationPressed by interactionSource.collectIsPressedAsState()
+
+        LoginScreen(modifier,
+            onForgotPasswordClick = {},
+            onLoginClick = {},
+            onRegistrationTabClick = {
+            }
+        )
     }
+
 }
 
-@Composable
-private fun extracted() {
-    Text(
-        text = "Hi, There",
-        style = MaterialTheme.typography.displayMedium,
-        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
-    )
-    TextField(
-        value = "nsaveek@gmail.com",
-        label = { Text("Registration") },
-        onValueChange = {})
-    Spacer(modifier = Modifier.size(16.dp))
-    TextField(value = "123456", label = { Text("Password") }, onValueChange = {})
-}
+
 
 @Composable
 fun GreetingView(text: String) {

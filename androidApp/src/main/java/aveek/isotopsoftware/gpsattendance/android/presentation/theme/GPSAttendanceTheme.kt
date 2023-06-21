@@ -1,4 +1,4 @@
-package aveek.isotopsoftware.gpsattendance.android.ui.theme
+package aveek.isotopsoftware.gpsattendance.android.presentation.theme
 
 import android.app.Activity
 import android.os.Build
