@@ -12,42 +12,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun LoginScreen(
-    modifier: Modifier = Modifier,
-    onForgotPasswordClick: () -> Unit,
+fun RegistrationScreen(
+    modifier: Modifier,
     onRegistrationTabClick: () -> Unit,
     onLoginClick: () -> Unit
 ) {
-    Box(modifier = Modifier
-        .padding(40.dp)
-        .fillMaxSize(),
+    Box(
+        modifier = Modifier
+            .padding(40.dp)
+            .fillMaxSize(),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -71,10 +60,7 @@ fun LoginScreen(
                     value = "Enter your email",
                     label = { Text("Email") },
                     onValueChange = {},
-                    leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email") },
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
-                        .fillMaxWidth()
+                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth()
                 )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
@@ -82,54 +68,45 @@ fun LoginScreen(
                 TextField(
                     value = "*******",
                     label = { Text("Password") },
-                    onValueChange = {
-
-                    },
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
-                        .fillMaxWidth(),
-                    leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password") },
+                    onValueChange = {},
+                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth(),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false){
-                        Checkbox(checked = false, onCheckedChange = {
-
-                        })
-                    }
-                    Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
-
-                    Text(text = "Remember for 30 days")
-                }
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                Column(modifier = Modifier.fillMaxWidth() ,horizontalAlignment = Alignment.End) {
-                    Text(text = "Forgot Password?",color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
-                }
+                TextField(
+                    value = "*******",
+                    label = { Text("Repeat Password") },
+                    onValueChange = {},
+                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth(),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
                 Row() {
                     Button(
-                        onClick = { onLoginClick.invoke() },
-                        modifier = Modifier.fillMaxWidth(),
+                        onClick = { onRegistrationTabClick.invoke() },
+                        modifier = Modifier.weight(1f),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(text = "Sign In")
+                        Text(text = "Register")
                     }
                 }
+                Spacer(modifier = modifier.size(DimensionTokens.dimension32.dp))
 
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+                Text(text = "Already Have an Account?")
+                Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
 
-                Text(text = "New User? Register Here", Modifier.clickable {
-                    onRegistrationTabClick.invoke()
+                Text(text = "Sign In Here", Modifier.clickable {
+                    onLoginClick.invoke()
                 })
             }
         }
-
-        Text(text = "Powered by Isotop Software Inc.",modifier = Modifier.align(Alignment.BottomCenter))
+        Text(
+            text = "Powered by Isotop Software Inc.",
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
