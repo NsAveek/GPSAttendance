@@ -124,9 +124,13 @@ fun LoginScreen(
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Text(text = "New User? Register Here", Modifier.clickable {
-                    onRegistrationTabClick.invoke()
-                })
+                Row(modifier =Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                    Text(text = "New User?")
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension2.dp))
+                    Text(text = "Register Here", fontWeight = FontWeight.Bold,color = MaterialTheme.colorScheme.primary,modifier = Modifier.clickable {
+                        onRegistrationTabClick.invoke()
+                    })
+                }
             }
         }
 
