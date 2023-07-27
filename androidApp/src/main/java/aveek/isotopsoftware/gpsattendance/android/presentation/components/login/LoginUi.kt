@@ -16,6 +16,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.twotone.Email
+import androidx.compose.material.icons.twotone.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,14 +28,19 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
@@ -41,15 +48,16 @@ import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    contentPadding : PaddingValues,
+    contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
     onForgotPasswordClick: () -> Unit,
     onRegistrationTabClick: () -> Unit,
     onLoginClick: () -> Unit
 ) {
-    Box(modifier = Modifier
-        .padding(contentPadding)
-        .fillMaxSize(),
+    Box(
+        modifier = Modifier
+            .padding(contentPadding)
+            .fillMaxSize(),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -69,11 +77,22 @@ fun LoginScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
+                var emailText by remember {
+                    mutableStateOf("")
+                }
+                var passwordText by remember {
+                    mutableStateOf("")
+                }
                 TextField(
-                    value = "Enter your email",
+                    value = emailText,
                     label = { Text("Email") },
-                    onValueChange = {},
-                    leadingIcon = { Icon(Icons.Default.Email, contentDescription = "Email") },
+                    placeholder = { Text("Please type you registered email") },
+                    onValueChange = {
+                        emailText = it
+                    },
+                    leadingIcon = { Icon(Icons.TwoTone.Email, contentDescription = "Email") },
+                    keyboardOptions =KeyboardOptions( keyboardType = KeyboardType.Email, imeAction = ImeAction.Next ),
+                    supportingText = { Text ("*required")},
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.medium)
                         .fillMaxWidth()
@@ -82,22 +101,28 @@ fun LoginScreen(
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
                 TextField(
-                    value = "*******",
+                    value = passwordText,
                     label = { Text("Password") },
+                    placeholder = { Text("Please type your password") },
                     onValueChange = {
-
+                        passwordText = it
                     },
+                    supportingText = { Text ("*required")},
+                    visualTransformation = PasswordVisualTransformation(),
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.medium)
                         .fillMaxWidth(),
-                    leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    leadingIcon = { Icon(Icons.TwoTone.Lock, contentDescription = "Password") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send)
                 )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false){
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
                         Checkbox(checked = false, onCheckedChange = {
 
                         })
@@ -108,8 +133,12 @@ fun LoginScreen(
                 }
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Column(modifier = Modifier.fillMaxWidth() ,horizontalAlignment = Alignment.End) {
-                    Text(text = "Forgot Password?",color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold, modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
+                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
+                    Text(
+                        text = "Forgot Password?",
+                        color = MaterialTheme.colorScheme.primary,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
                 }
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
@@ -126,16 +155,26 @@ fun LoginScreen(
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Row(modifier =Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
                     Text(text = "New User?")
                     Spacer(modifier = modifier.size(DimensionTokens.dimension2.dp))
-                    Text(text = "Register Here", fontWeight = FontWeight.Bold,color = MaterialTheme.colorScheme.primary,modifier = Modifier.clickable {
-                        onRegistrationTabClick.invoke()
-                    })
+                    Text(
+                        text = "Register Here",
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable {
+                            onRegistrationTabClick.invoke()
+                        })
                 }
             }
         }
 
-        Text(text = "Powered by Isotop Software Inc.",modifier = Modifier.align(Alignment.BottomCenter))
+        Text(
+            text = "Powered by Isotop Software Inc.",
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }

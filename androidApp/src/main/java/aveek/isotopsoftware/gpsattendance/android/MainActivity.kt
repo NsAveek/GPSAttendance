@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
                         NavHost(
                             navController = navController,
-                            startDestination = Screens.ProfileScreen.route
+                            startDestination = Screens.LoginScreen.route
                         ) {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
