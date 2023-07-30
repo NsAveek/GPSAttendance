@@ -13,7 +13,7 @@ val Montserrat = FontFamily(
     Font(R.font.montserrat_bold, FontWeight.Bold)
 )
 
-val Typography = Typography(
+val LocalTypography = Typography(
     displayLarge = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Normal,

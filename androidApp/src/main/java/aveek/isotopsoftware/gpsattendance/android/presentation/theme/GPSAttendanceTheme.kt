@@ -108,7 +108,7 @@ content: @Composable () -> Unit
     MaterialTheme(
         colorScheme = colorScheme,
         shapes = Shapes,
-        typography = Typography,
+        typography = LocalTypography,
         content = content
     )
 }

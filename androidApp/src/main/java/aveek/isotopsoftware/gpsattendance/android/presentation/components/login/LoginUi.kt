@@ -14,8 +14,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.twotone.Email
 import androidx.compose.material.icons.twotone.Lock
 import androidx.compose.material3.Button
@@ -43,6 +41,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.text.TextFields
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,37 +82,41 @@ fun LoginScreen(
                 var passwordText by remember {
                     mutableStateOf("")
                 }
-                TextField(
+
+                TextFields(
                     value = emailText,
-                    label = { Text("Email") },
                     placeholder = { Text("Please type you registered email") },
-                    onValueChange = {
-                        emailText = it
-                    },
+                    label = { Text("Email") },
                     leadingIcon = { Icon(Icons.TwoTone.Email, contentDescription = "Email") },
                     keyboardOptions =KeyboardOptions( keyboardType = KeyboardType.Email, imeAction = ImeAction.Next ),
-                    supportingText = { Text ("*required")},
+                    supportingTextRequired = true,
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.medium)
-                        .fillMaxWidth()
+                        .fillMaxWidth(),
+                    onValueChanged = {
+                        emailText = it
+                    },
+                    style = null,
+                    visualTransformation = VisualTransformation.None
                 )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                TextField(
+                TextFields(
                     value = passwordText,
-                    label = { Text("Password") },
                     placeholder = { Text("Please type your password") },
-                    onValueChange = {
-                        passwordText = it
-                    },
-                    supportingText = { Text ("*required")},
-                    visualTransformation = PasswordVisualTransformation(),
+                    label = { Text("Password") },
+                    leadingIcon = { Icon(Icons.TwoTone.Lock, contentDescription = "Password") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send),
+                    supportingTextRequired = true,
                     modifier = Modifier
                         .clip(MaterialTheme.shapes.medium)
                         .fillMaxWidth(),
-                    leadingIcon = { Icon(Icons.TwoTone.Lock, contentDescription = "Password") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send)
+                    onValueChanged = {
+                        passwordText = it
+                    },
+                    style = null,
+                    visualTransformation = PasswordVisualTransformation(),
                 )
 
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
