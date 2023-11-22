@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Person
@@ -26,6 +27,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,25 +39,42 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun ProfileScreen(paddingValues: PaddingValues) {
+fun ProfileScreen() {
+    Scaffold(
+        topBar = {
+            CustomTopAppBar(title =  "Profile", centerAligned = false, navigationIcon = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                }
+            })
+    }
+    ) {
+
+    }
     Box(
         modifier = Modifier
-            .padding(paddingValues)
             .fillMaxSize()
     ) {
         val contentPadding = DimensionTokens.dimension40.dp
         Column(
             modifier = Modifier
-                .padding(contentPadding)
+                .padding(start = contentPadding, end = contentPadding)
         ) {
+/*
+            Row {
+                Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "")
+                Spacer(modifier = Modifier.size(DimensionTokens.dimension8.dp))
+                Text(text = "Profile", style = MaterialTheme.typography.displayMedium)
+            }
 
-            Text(text = "Profile", style = MaterialTheme.typography.displayMedium)
 
             Spacer(modifier = Modifier.size(DimensionTokens.dimension32.dp))
+*/
 
             Column(
                 modifier = Modifier.fillMaxWidth(),
@@ -79,7 +98,7 @@ fun ProfileScreen(paddingValues: PaddingValues) {
                     IconButton(onClick = {},
                         modifier = Modifier
                             .offset {
-                                IntOffset(-offsetInPx, offsetInPx-20)
+                                IntOffset(-offsetInPx, offsetInPx - 20)
                             }
                             .clip(CircleShape)
                             .background(Color.Transparent)

@@ -30,6 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.LoginScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.RegistrationScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.profile.ProfileScreen
@@ -39,6 +40,7 @@ import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 import kotlin.math.absoluteValue
 
 class MainActivity : ComponentActivity() {
+
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     bottomBar = {
 
                     },
-                    content = {paddingValues ->
+                    content = {
 
                         val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
                         val topBarState = rememberSaveable { (mutableStateOf(true)) }
@@ -102,7 +104,7 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(Screens.ProfileScreen.route) {
-                                ProfileScreen(paddingValues)
+                                ProfileScreen()
                             }
                         }
                     }
@@ -114,19 +116,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun TopAppBar(modifier: Modifier) {
-        CenterAlignedTopAppBar(
-            title = {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "GPS Attendance",
-                        style = MaterialTheme.typography.displayMedium
-                    )
-                }
-            },
-            modifier = modifier
-        )
+        CustomTopAppBar(title =  "GPS Attendance", centerAligned = true)
     }
 
     @Composable

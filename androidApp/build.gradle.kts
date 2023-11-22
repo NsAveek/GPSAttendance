@@ -40,6 +40,7 @@ android {
 
 dependencies {
     val nav_version = "2.6.0"
+    val koin_version = "3.4.3"
     implementation(project(":shared"))
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
@@ -47,6 +48,8 @@ dependencies {
     implementation("androidx.compose.foundation:foundation:1.4.3")
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.activity:activity-compose:1.7.1")
+    implementation ("io.insert-koin:koin-android:$koin_version")
+    implementation("io.insert-koin:koin-ktor:$koin_version")
 //    implementation("androidx.navigation:navigation-runtime-ktx:$nav_version")
 //    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
 //
