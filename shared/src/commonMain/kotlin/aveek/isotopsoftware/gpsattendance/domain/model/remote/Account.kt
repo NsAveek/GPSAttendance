@@ -1,4 +1,4 @@
-package aveek.isotopsoftware.gpsattendance.domain.model
+package aveek.isotopsoftware.gpsattendance.domain.model.remote
 
 data class Account(
     val email: String,

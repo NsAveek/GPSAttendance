@@ -47,10 +47,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             GPSAttendanceTheme {
                 Scaffold(
-                    topBar = { TopAppBar(modifier = Modifier) },
-                    bottomBar = {
-
-                    },
                     content = {
 
                         val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
@@ -68,7 +64,7 @@ class MainActivity : ComponentActivity() {
 
                             Screens.ProfileScreen.route -> {
                                 bottomBarState.value = true
-                                topBarState.value = true
+                                topBarState.value = false
                             }
                         }
 
