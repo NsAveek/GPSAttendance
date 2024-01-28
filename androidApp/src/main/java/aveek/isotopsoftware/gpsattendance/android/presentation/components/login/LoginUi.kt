@@ -63,133 +63,133 @@ fun LoginScreen(
             CustomTopAppBar(title =  "GPS ATTENDANCE", centerAligned = true)
         }
     ) {
-
-    }
-    Box(
-        modifier = Modifier
-            .padding(contentPadding)
-            .fillMaxSize(),
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.align(Alignment.Center)
+        Box(
+            modifier = Modifier
+                .padding(contentPadding)
+                .fillMaxSize(),
         ) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-                Text(
-                    text = "Hi, There",
-                    style = MaterialTheme.typography.displayMedium,
-                    modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
-                )
-            }
-            Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.align(Alignment.Center)
             ) {
-                var emailText by remember {
-                    mutableStateOf("")
-                }
-                var passwordText by remember {
-                    mutableStateOf("")
-                }
-
-                TextFields(
-                    value = emailText,
-                    placeholder = { Text("Please type you registered email") },
-                    label = { Text("Email") },
-                    leadingIcon = { Icon(Icons.TwoTone.Email, contentDescription = "Email") },
-                    keyboardOptions =KeyboardOptions( keyboardType = KeyboardType.Email, imeAction = ImeAction.Next ),
-                    supportingTextRequired = true,
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
-                        .fillMaxWidth(),
-                    onValueChanged = {
-                        emailText = it
-                    },
-                    style = null,
-                    visualTransformation = VisualTransformation.None
-                )
-
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                TextFields(
-                    value = passwordText,
-                    placeholder = { Text("Please type your password") },
-                    label = { Text("Password") },
-                    leadingIcon = { Icon(Icons.TwoTone.Lock, contentDescription = "Password") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send),
-                    supportingTextRequired = true,
-                    modifier = Modifier
-                        .clip(MaterialTheme.shapes.medium)
-                        .fillMaxWidth(),
-                    onValueChanged = {
-                        passwordText = it
-                    },
-                    style = null,
-                    visualTransformation = PasswordVisualTransformation(),
-                )
-
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
-                        Checkbox(checked = false, onCheckedChange = {
-
-                        })
-                    }
-                    Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
-
-                    Text(text = "Remember for 30 days")
-                }
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
                     Text(
-                        text = "Forgot Password?",
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
+                        text = "Hi, There",
+                        style = MaterialTheme.typography.displayMedium,
+                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
+                    )
                 }
-
                 Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Row() {
-                    Button(
-                        onClick = { onLoginClick.invoke() },
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    var emailText by remember {
+                        mutableStateOf("")
+                    }
+                    var passwordText by remember {
+                        mutableStateOf("")
+                    }
+
+                    TextFields(
+                        value = emailText,
+                        placeholder = { Text("Please type you registered email") },
+                        label = { Text("Email") },
+                        leadingIcon = { Icon(Icons.TwoTone.Email, contentDescription = "Email") },
+                        keyboardOptions =KeyboardOptions( keyboardType = KeyboardType.Email, imeAction = ImeAction.Next ),
+                        supportingTextRequired = true,
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.medium)
+                            .fillMaxWidth(),
+                        onValueChanged = {
+                            emailText = it
+                        },
+                        style = null,
+                        visualTransformation = VisualTransformation.None
+                    )
+
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    TextFields(
+                        value = passwordText,
+                        placeholder = { Text("Please type your password") },
+                        label = { Text("Password") },
+                        leadingIcon = { Icon(Icons.TwoTone.Lock, contentDescription = "Password") },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password, imeAction = ImeAction.Send),
+                        supportingTextRequired = true,
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.medium)
+                            .fillMaxWidth(),
+                        onValueChanged = {
+                            passwordText = it
+                        },
+                        style = null,
+                        visualTransformation = PasswordVisualTransformation(),
+                    )
+
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    Row(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(10.dp)
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(text = "Sign In")
+                        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                            Checkbox(checked = false, onCheckedChange = {
+
+                            })
+                        }
+                        Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
+
+                        Text(text = "Remember for 30 days")
                     }
-                }
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+                    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
+                        Text(
+                            text = "Forgot Password?",
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
+                    }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "New User?")
-                    Spacer(modifier = modifier.size(DimensionTokens.dimension2.dp))
-                    Text(
-                        text = "Register Here",
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable {
-                            onRegistrationTabClick.invoke()
-                        })
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    Row() {
+                        Button(
+                            onClick = { onLoginClick.invoke() },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(text = "Sign In")
+                        }
+                    }
+
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Text(text = "New User?")
+                        Spacer(modifier = modifier.size(DimensionTokens.dimension2.dp))
+                        Text(
+                            text = "Register Here",
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.clickable {
+                                onRegistrationTabClick.invoke()
+                            })
+                    }
                 }
             }
-        }
 
-        Text(
-            text = "Powered by Isotop Software Inc.",
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
+            Text(
+                text = "Powered by Isotop Software Inc.",
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
+        }
     }
+
 }

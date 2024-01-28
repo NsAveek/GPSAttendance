@@ -100,7 +100,11 @@ class MainActivity : ComponentActivity() {
                                 )
                             }
                             composable(Screens.ProfileScreen.route) {
-                                ProfileScreen()
+                                ProfileScreen(
+                                    onBackButtonClick = {
+                                        navController.popBackStack()
+                                    }
+                                )
                             }
                         }
                     }
@@ -147,7 +151,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun DefaultPreview() {
         GPSAttendanceTheme(darkTheme = true) {
-            CoreScreen(PaddingValues(5.dp), false, modifier = Modifier)
+            CoreScreen(PaddingValues(DimensionTokens.dimension4.dp), false, modifier = Modifier)
 //        GreetingView("Hello, Android!")
         }
     }

@@ -1,5 +1,6 @@
 package aveek.isotopsoftware.gpsattendance.android.presentation.components.login
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -24,89 +26,103 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
+import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun RegistrationScreen(
     modifier: Modifier,
     onRegistrationTabClick: () -> Unit,
     onLoginClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .padding(40.dp)
-            .fillMaxSize(),
+    Scaffold(
+        topBar = {
+            CustomTopAppBar(title =  "GPS ATTENDANCE", centerAligned = true)
+        }
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.align(Alignment.Center)
+        Box(
+            modifier = Modifier
+                .padding(40.dp)
+                .fillMaxSize(),
         ) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
-                Text(
-                    text = "Hi, There",
-                    style = MaterialTheme.typography.displayMedium,
-                    modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
-                )
-            }
-            Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.align(Alignment.Center)
             ) {
-                TextField(
-                    value = "Enter your email",
-                    label = { Text("Email") },
-                    onValueChange = {},
-                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth()
-                )
-
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                TextField(
-                    value = "*******",
-                    label = { Text("Password") },
-                    onValueChange = {},
-                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                )
-
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                TextField(
-                    value = "*******",
-                    label = { Text("Repeat Password") },
-                    onValueChange = {},
-                    modifier = Modifier.clip(MaterialTheme.shapes.medium).fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-                )
-
-                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
-
-                Row() {
-                    Button(
-                        onClick = { onRegistrationTabClick.invoke() },
-                        modifier = Modifier.weight(1f),
-                        shape = RoundedCornerShape(10.dp)
-                    ) {
-                        Text(text = "Register")
-                    }
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+                    Text(
+                        text = "Hi, There",
+                        style = MaterialTheme.typography.displayMedium,
+                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
+                    )
                 }
-                Spacer(modifier = modifier.size(DimensionTokens.dimension32.dp))
+                Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                Text(text = "Already Have an Account?")
-                Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    TextField(
+                        value = "Enter your email",
+                        label = { Text("Email") },
+                        onValueChange = {},
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.medium)
+                            .fillMaxWidth()
+                    )
 
-                Text(text = "Sign In Here", Modifier.clickable {
-                    onLoginClick.invoke()
-                })
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    TextField(
+                        value = "*******",
+                        label = { Text("Password") },
+                        onValueChange = {},
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.medium)
+                            .fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    )
+
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    TextField(
+                        value = "*******",
+                        label = { Text("Repeat Password") },
+                        onValueChange = {},
+                        modifier = Modifier
+                            .clip(MaterialTheme.shapes.medium)
+                            .fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                    )
+
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
+
+                    Row() {
+                        Button(
+                            onClick = { onRegistrationTabClick.invoke() },
+                            modifier = Modifier.weight(1f),
+                            shape = RoundedCornerShape(10.dp)
+                        ) {
+                            Text(text = "Register")
+                        }
+                    }
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension32.dp))
+
+                    Text(text = "Already Have an Account?")
+                    Spacer(modifier = modifier.size(DimensionTokens.dimension8.dp))
+
+                    Text(text = "Sign In Here", Modifier.clickable {
+                        onLoginClick.invoke()
+                    })
+                }
             }
+            Text(
+                text = "Powered by Isotop Software Inc.",
+                modifier = Modifier.align(Alignment.BottomCenter)
+            )
         }
-        Text(
-            text = "Powered by Isotop Software Inc.",
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
     }
 }
