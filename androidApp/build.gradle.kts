@@ -17,7 +17,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.7"
+        kotlinCompilerExtensionVersion = "1.5.5"
     }
     packaging {
         resources {
@@ -42,6 +42,7 @@ dependencies {
     val nav_version = "2.6.0"
     val koin_version = "3.4.3"
     implementation(project(":shared"))
+    implementation(libs.kotlinx.coroutines.android)
     implementation("androidx.compose.ui:ui:1.4.3")
     implementation("androidx.compose.ui:ui-tooling:1.4.3")
     implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
@@ -60,6 +61,7 @@ dependencies {
 //    androidTestImplementation ("androidx.navigation:navigation-testing:$nav_version")
 
     // Jetpack Compose Integration
+    //noinspection GradleDependency
     implementation ("androidx.navigation:navigation-compose:$nav_version")
 
 }

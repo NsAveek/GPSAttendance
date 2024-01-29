@@ -1,7 +1,7 @@
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    kotlin("plugin.serialization") version "1.8.22"
+    kotlin("plugin.serialization") version "1.9.20"
 }
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
@@ -26,15 +26,16 @@ kotlin {
         }
     }
 
-    val ktorVersion = "2.2.4"
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(libs.ktor.client.core)
+                implementation(libs.kotlinx.coroutines.core)
+
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+//                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+//                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -44,13 +45,13 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
+                implementation(libs.ktor.client.okhttp)
             }
         }
         val iosMain by getting {
             // ...
             dependencies {
-                implementation("io.ktor:ktor-client-darwin:$ktorVersion")
+                implementation(libs.ktor.client.darwin)
             }
         }
     }
