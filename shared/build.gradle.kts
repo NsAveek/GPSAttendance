@@ -32,7 +32,8 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.core)
                 implementation(libs.kotlinx.coroutines.core)
-
+                api(libs.koin.core)
+                api(libs.koin.test)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
 //                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
 //                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")

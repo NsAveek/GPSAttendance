@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace = "aveek.isotopsoftware.gpsattendance.android"
-    compileSdk = 33
+    compileSdk =  libs.versions.compileSdk.get().toInt()
     defaultConfig {
         applicationId = "aveek.isotopsoftware.gpsattendance.android"
-        minSdk = 24
-        targetSdk = 33
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk =  libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -43,13 +43,18 @@ dependencies {
     val koin_version = "3.4.3"
     implementation(project(":shared"))
     implementation(libs.kotlinx.coroutines.android)
-    implementation("androidx.compose.ui:ui:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling:1.4.3")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.4.3")
-    implementation("androidx.compose.foundation:foundation:1.4.3")
+    implementation(libs.koin.android)
+    implementation(libs.koin.compsoe)
+
+    implementation(libs.compose.ui)
+    implementation(libs.compose.ui.tooling)
+    implementation(libs.compose.ui.tooling.preview)
+    implementation(libs.compose.foundation)
+
+
     implementation("androidx.compose.material3:material3:1.1.0")
     implementation("androidx.activity:activity-compose:1.7.1")
-    implementation ("io.insert-koin:koin-android:$koin_version")
+
     implementation("io.insert-koin:koin-ktor:$koin_version")
 //    implementation("androidx.navigation:navigation-runtime-ktx:$nav_version")
 //    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")

@@ -1,7 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     //trick: for the same plugin versions in all sub-modules
-    id("com.android.application").version("8.0.0").apply(false)
-    id("com.android.library").version("8.0.0").apply(false)
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+
     kotlin("android").version("1.9.20").apply(false)
     kotlin("multiplatform").version("1.9.20").apply(false)
 }
