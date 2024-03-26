@@ -75,6 +75,7 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
+//                                        vie
                                         navController.navigate(Screens.ProfileScreen.route) {
                                             launchSingleTop = true
                                         }

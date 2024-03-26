@@ -9,7 +9,6 @@ class GPSAttendanceApp : Application() {
         super.onCreate()
         startKoin{
             androidContext(this@GPSAttendanceApp)
-
         }
     }
 }

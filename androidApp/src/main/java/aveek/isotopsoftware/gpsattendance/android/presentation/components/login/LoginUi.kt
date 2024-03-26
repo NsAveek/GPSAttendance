@@ -156,7 +156,7 @@ fun LoginScreen(
 
                     Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
-                    Row() {
+                    Row {
                         Button(
                             onClick = { onLoginClick.invoke() },
                             modifier = Modifier.fillMaxWidth(),
@@ -191,5 +191,4 @@ fun LoginScreen(
             )
         }
     }
-
 }
