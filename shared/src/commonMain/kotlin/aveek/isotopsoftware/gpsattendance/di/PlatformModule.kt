@@ -1,9 +1,5 @@
 package aveek.isotopsoftware.gpsattendance.di
 
-import org.koin.core.module.dsl.singleOf
-import org.koin.dsl.module
-import aveek.isotopsoftware.gpsattendance.Platform
+import org.koin.core.module.Module
 
-//val platformModule = module {
-//    single <Platform> {  }
-//}
+expect fun platformModule() : Module

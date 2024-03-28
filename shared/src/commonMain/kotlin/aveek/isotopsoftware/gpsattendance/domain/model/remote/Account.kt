@@ -1,5 +1,8 @@
 package aveek.isotopsoftware.gpsattendance.domain.model.remote
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Account(
     val email: String,
     val firstName: String,
