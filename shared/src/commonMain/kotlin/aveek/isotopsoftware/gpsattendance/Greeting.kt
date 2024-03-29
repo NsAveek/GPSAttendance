@@ -1,9 +1,9 @@
 package aveek.isotopsoftware.gpsattendance
 
 class Greeting {
-    private val platform: Platform = getPlatform()
-
-    fun greet(): String {
-        return "Hello, ${platform.name}!"
-    }
+//    private val commonPlatform: Object = CommonPlatform()
+//
+//    fun greet(): String {
+//        return "Hello, ${commonPlatform.name}!"
+//    }
 }

@@ -1,9 +1,10 @@
 package aveek.isotopsoftware.gpsattendance
 
-import aveek.isotopsoftware.gpsattendance.di.initiateKoin
+import aveek.isotopsoftware.gpsattendance.di.appModule
+import org.koin.core.context.startKoin
 
-class Koin{
-    fun initKoin(){
-        initiateKoin()
+fun initKoin(){
+    startKoin {
+        modules(appModule())
     }
 }

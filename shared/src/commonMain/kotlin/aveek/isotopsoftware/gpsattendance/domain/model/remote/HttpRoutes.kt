@@ -1,6 +1,6 @@
 package aveek.isotopsoftware.gpsattendance.domain.model.remote
 
-object HttpRoutes {
-    private const val BASE_URL = "https://dummyjson.com"
-    const val getAccount = "$BASE_URL/auth/login"
+internal object HttpRoutes {
+    const val BASE_URL = "https://dummyjson.com"
+    const val GetAccount = "$BASE_URL/auth/login"
 }

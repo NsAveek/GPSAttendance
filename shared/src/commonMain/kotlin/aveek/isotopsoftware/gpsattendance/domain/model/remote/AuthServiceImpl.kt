@@ -10,7 +10,7 @@ import io.ktor.client.request.get
 class AuthServiceImpl (private val client : HttpClient): AuthService {
     override suspend fun getAccount(): Account? {
         return try {
-            client.get(HttpRoutes.getAccount).body()
+            client.get(HttpRoutes.GetAccount).body()
         } catch (e : RedirectResponseException){
             return null
         } catch (e : ClientRequestException){

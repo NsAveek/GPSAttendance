@@ -1,5 +1,6 @@
 package aveek.isotopsoftware.gpsattendance.di
 
+import aveek.isotopsoftware.gpsattendance.domain.model.remote.HttpRoutes
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -12,22 +13,22 @@ import io.ktor.http.takeFrom
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-actual class ApiService actual constructor() {
-    actual fun build(): HttpClient {
-        return HttpClient{
+actual class ApiService {
+    actual val client: HttpClient
+        get() = HttpClient {
             defaultRequest {
-                url.takeFrom(URLBuilder().takeFrom(""))
+                url.takeFrom(URLBuilder().takeFrom(HttpRoutes.BASE_URL))
             }
-            install(HttpTimeout){
+            install(HttpTimeout) {
                 requestTimeoutMillis = 15_000
             }
-            install(ContentNegotiation){
+            install(ContentNegotiation) {
                 json(Json {
                     ignoreUnknownKeys = true
                     prettyPrint = true
                 })
             }
-            install(Logging){
+            install(Logging) {
                 level = LogLevel.ALL
                 logger = object : Logger {
                     override fun log(message: String) {
@@ -36,5 +37,4 @@ actual class ApiService actual constructor() {
                 }
             }
         }
-    }
 }

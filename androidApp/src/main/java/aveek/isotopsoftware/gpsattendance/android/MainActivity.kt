@@ -2,6 +2,7 @@ package aveek.isotopsoftware.gpsattendance.android
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -9,12 +10,9 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,10 +35,16 @@ import aveek.isotopsoftware.gpsattendance.android.presentation.components.profil
 import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendanceTheme
 import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
-import kotlin.math.absoluteValue
+import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
+import aveek.isotopsoftware.gpsattendance.data.repository.AuthRepoImpl
+import aveek.isotopsoftware.gpsattendance.domain.repository.AuthRepo
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
-
+    val data = AuthCredentials(username = "0lelplR", password = "kminchelle")
+    val authRepo : AuthRepoImpl by inject()
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +79,11 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
+                                        GlobalScope.launch{
+                                            val result = authRepo.fetchUser(data)
+                                            Log.d("rees", result.token)
+                                        }
+//                                        Log.d("ns - greet ", platformData.name)
 //                                        vie
                                         navController.navigate(Screens.ProfileScreen.route) {
                                             launchSingleTop = true
