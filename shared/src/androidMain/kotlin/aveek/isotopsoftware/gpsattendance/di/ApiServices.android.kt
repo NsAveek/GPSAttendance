@@ -16,9 +16,9 @@ import kotlinx.serialization.json.Json
 actual class ApiService {
     actual val client: HttpClient
         get() = HttpClient {
-            defaultRequest {
-                url.takeFrom(URLBuilder().takeFrom(HttpRoutes.BASE_URL))
-            }
+//            defaultRequest {
+//                url.takeFrom(URLBuilder().takeFrom(HttpRoutes.BASE_URL))
+//            }
             install(HttpTimeout) {
                 requestTimeoutMillis = 15_000
             }
@@ -26,6 +26,7 @@ actual class ApiService {
                 json(Json {
                     ignoreUnknownKeys = true
                     prettyPrint = true
+                    isLenient = true
                 })
             }
             install(Logging) {

@@ -1,5 +1,6 @@
 package aveek.isotopsoftware.gpsattendance.di
 
+import aveek.isotopsoftware.gpsattendance.Greeting
 import aveek.isotopsoftware.gpsattendance.PlatformModule
 import aveek.isotopsoftware.gpsattendance.api.AuthApi
 import aveek.isotopsoftware.gpsattendance.data.repository.AuthRepoImpl
@@ -19,6 +20,8 @@ val platformModule = module {
     single { PlatformModule() }
 }
 val dataSourceModule = module {
+    single { Greeting() }
+    single { ApiService() }
     single { AuthApi(get()) }
-    single <AuthRepo> { AuthRepoImpl(get()) }
+    factory <AuthRepo> { AuthRepoImpl(get()) }
 }

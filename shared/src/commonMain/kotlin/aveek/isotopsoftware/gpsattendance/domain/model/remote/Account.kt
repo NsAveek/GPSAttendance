@@ -1,15 +1,24 @@
 package aveek.isotopsoftware.gpsattendance.domain.model.remote
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class Account(
-    val email: String,
-    val firstName: String,
-    val gender: String,
     val id: Int,
-    val image: String,
-    val lastName: String,
-    val token: String,
-    val username: String
+    val username: String,
+    @SerialName("email") val email: String,
+    @SerialName("firstName") val firstName: String,
+    @SerialName("lastName")  val lastName: String,
+    @SerialName("gender") val gender: String,
+    @SerialName("image") val image: String,
+    @SerialName("token") val token: String
+)
+
+@Serializable
+data class Cats(
+    val id : String,
+    val url: String,
+    val width : Int,
+    val height : Int
 )

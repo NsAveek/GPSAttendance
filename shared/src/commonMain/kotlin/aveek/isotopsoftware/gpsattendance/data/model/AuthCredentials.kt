@@ -1,3 +1,7 @@
 package aveek.isotopsoftware.gpsattendance.data.model
 
-data class AuthCredentials(val username : String, val password : String)
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AuthCredentials(
+    @Serializable val username : String, @Serializable val password : String)

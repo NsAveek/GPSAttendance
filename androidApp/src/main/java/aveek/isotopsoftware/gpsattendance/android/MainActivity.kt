@@ -28,23 +28,27 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import aveek.isotopsoftware.gpsattendance.Greeting
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.LoginScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.RegistrationScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.profile.ProfileScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendanceTheme
 import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
+import aveek.isotopsoftware.gpsattendance.api.AuthApi
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
 import aveek.isotopsoftware.gpsattendance.data.repository.AuthRepoImpl
 import aveek.isotopsoftware.gpsattendance.domain.repository.AuthRepo
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
+import org.koin.core.component.KoinComponent
 
-class MainActivity : ComponentActivity() {
-    val data = AuthCredentials(username = "0lelplR", password = "kminchelle")
-    val authRepo : AuthRepoImpl by inject()
+class MainActivity : ComponentActivity(), KoinComponent {
+
+    val authRepo : AuthApi by inject()
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +83,10 @@ class MainActivity : ComponentActivity() {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
-                                        GlobalScope.launch{
+                                        runBlocking {
+                                            val data = AuthCredentials(username = "kminchelle", password = "0lelplR")
                                             val result = authRepo.fetchUser(data)
-                                            Log.d("rees", result.token)
+                                            Log.d("rees", result?.token?:"none found")
                                         }
 //                                        Log.d("ns - greet ", platformData.name)
 //                                        vie
