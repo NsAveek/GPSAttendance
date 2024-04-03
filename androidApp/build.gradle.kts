@@ -40,22 +40,28 @@ android {
 
 dependencies {
     val nav_version = "2.6.0"
-    val koin_version = "3.4.3"
+    configurations {
+        all {
+            exclude (group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
+        }
+    }
     implementation(project(":shared"))
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.koin.android)
-    implementation(libs.koin.compsoe)
-
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.foundation)
 
 
-    implementation("androidx.compose.material3:material3:1.1.0")
-    implementation("androidx.activity:activity-compose:1.7.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
-    implementation("io.insert-koin:koin-ktor:$koin_version")
+    implementation("androidx.compose.material3:material3:1.1.0")
+
+//    implementation("io.insert-koin:koin-ktor:$koin_version")
 //    implementation("androidx.navigation:navigation-runtime-ktx:$nav_version")
 //    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
 //

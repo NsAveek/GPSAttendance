@@ -1,8 +1,7 @@
 package aveek.isotopsoftware.gpsattendance
 
 import android.app.Application
-import aveek.isotopsoftware.gpsattendance.android.di.androidModule
-import aveek.isotopsoftware.gpsattendance.di.commonModule
+import aveek.isotopsoftware.gpsattendance.di.androidModule
 import aveek.isotopsoftware.gpsattendance.di.initKoin
 import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext

@@ -1,9 +1,9 @@
-package aveek.isotopsoftware.gpsattendance.android.di
+package aveek.isotopsoftware.gpsattendance.di
 
-import aveek.isotopsoftware.gpsattendance.android.presentation.viewmodel.AuthenticationViewModel
 import aveek.isotopsoftware.gpsattendance.domain.usecases.AuthenticationUseCase
-import org.koin.androidx.viewmodel.dsl.viewModel
+import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
 import org.koin.dsl.module
+import org.koin.androidx.viewmodel.dsl.viewModel
 
 // Android specific modules
 val androidModule = module {
@@ -18,5 +18,7 @@ val useCasesModule = module {
     factory { AuthenticationUseCase(get()) }
 }
 val viewModelModule = module {
-    viewModel <AuthenticationViewModel> { get() }
+    viewModel<AuthenticationViewModel> { get() }
+//    viewModel<AuthenticationViewModel>()
+//    viewModel<AuthenticationViewModel>{ get() }
 }

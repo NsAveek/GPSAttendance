@@ -6,9 +6,9 @@ plugins {
 
 @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
-    targetHierarchy.default()
+    applyDefaultHierarchyTemplate()
 
-    android {
+    androidTarget {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -34,8 +34,10 @@ kotlin {
                 implementation(libs.ktor.client.content.negotiation)
                 implementation(libs.ktor.client.logging)
                 implementation(libs.ktor.serialization.kotlinx.json)
-
                 implementation(libs.kotlinx.coroutines.core)
+
+                implementation(libs.lifecycle.viewmodel)
+
                 api(libs.koin.core)
                 api(libs.koin.test)
             }
@@ -48,6 +50,7 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(libs.ktor.client.okhttp)
+                implementation(libs.koin.android)
             }
         }
         val iosMain by getting {

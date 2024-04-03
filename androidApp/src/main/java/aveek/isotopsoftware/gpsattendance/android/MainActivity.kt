@@ -25,7 +25,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -36,16 +35,15 @@ import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.profile.ProfileScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendanceTheme
 import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
-import aveek.isotopsoftware.gpsattendance.android.presentation.viewmodel.AuthenticationViewModel
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
-import kotlinx.coroutines.runBlocking
+import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
 import org.koin.core.component.KoinComponent
-import androidx.compose.runtime.*
+import org.koin.core.component.inject
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
 class MainActivity : ComponentActivity(), KoinComponent {
-    private val viewModel by viewModel<AuthenticationViewModel>()
+    protected val viewModel: AuthenticationViewModel by inject()
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,11 +78,12 @@ class MainActivity : ComponentActivity(), KoinComponent {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
-                                        runBlocking {
-//                                            val data = AuthCredentials(username = "kminchelle", password = "0lelplR")
-//                                            val result = authRepo.fetchUser(data)
-//                                            Log.d("rees", result?.token?:"none found")
-                                        }
+                                        viewModel.check()
+//                                        runBlocking {
+////                                            val data = AuthCredentials(username = "kminchelle", password = "0lelplR")
+////                                            val result = authRepo.fetchUser(data)
+////                                            Log.d("rees", result?.token?:"none found")
+//                                        }
                                         navController.navigate(Screens.ProfileScreen.route) {
                                             launchSingleTop = true
                                         }
