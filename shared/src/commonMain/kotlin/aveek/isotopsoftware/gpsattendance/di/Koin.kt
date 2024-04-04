@@ -5,12 +5,14 @@ import aveek.isotopsoftware.gpsattendance.api.AuthApi
 import aveek.isotopsoftware.gpsattendance.data.repository.AuthRepoImpl
 import aveek.isotopsoftware.gpsattendance.domain.repository.AuthRepo
 import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin{
     appDeclaration()
     modules(appModule())
+//    modules(coreModule)
 }
 fun appModule() = listOf(commonModule, dataSourceModule)
 

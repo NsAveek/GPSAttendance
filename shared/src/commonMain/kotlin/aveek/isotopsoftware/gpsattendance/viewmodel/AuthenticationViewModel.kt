@@ -2,9 +2,9 @@ package aveek.isotopsoftware.gpsattendance.viewmodel
 
 import androidx.lifecycle.ViewModel
 import aveek.isotopsoftware.gpsattendance.domain.usecases.AuthenticationUseCase
-import org.koin.core.component.KoinComponent
 
-class AuthenticationViewModel (val authenticationUseCase : AuthenticationUseCase) : ViewModel(), KoinComponent {
+
+open class AuthenticationViewModel (authenticationUseCase: AuthenticationUseCase): ViewModel(){
 
     init {
 //        Log.d("Test Aveek", "VM Testing")

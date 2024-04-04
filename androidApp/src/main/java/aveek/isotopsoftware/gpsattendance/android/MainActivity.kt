@@ -2,6 +2,7 @@ package aveek.isotopsoftware.gpsattendance.android
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -29,6 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import aveek.isotopsoftware.gpsattendance.Greeting
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.LoginScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.RegistrationScreen
@@ -37,8 +39,10 @@ import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendan
 import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
+import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -48,6 +52,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val data = viewModel.check()
             GPSAttendanceTheme {
                 Scaffold(
                     content = {
@@ -78,7 +83,9 @@ class MainActivity : ComponentActivity(), KoinComponent {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
-                                        viewModel.check()
+//                                        val data = greeting.data
+//                                        Log.d("rees", data)
+//                                        viewModel.check()
 //                                        runBlocking {
 ////                                            val data = AuthCredentials(username = "kminchelle", password = "0lelplR")
 ////                                            val result = authRepo.fetchUser(data)

@@ -39,7 +39,6 @@ android {
 }
 
 dependencies {
-    val nav_version = "2.6.0"
     configurations {
         all {
             exclude (group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
@@ -49,12 +48,23 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.koin.android)
     implementation(libs.koin.core)
-    implementation(libs.koin.compose)
-    implementation(libs.compose.ui)
+    implementation(libs.koin.compose){
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
+    }
+    implementation(libs.compose.ui){
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
+    }
     implementation(libs.compose.ui.tooling)
     implementation(libs.compose.ui.tooling.preview)
-    implementation(libs.compose.foundation)
-
+    implementation(libs.compose.foundation){
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx") // Here we are exlcuding the ViewModel dependency
+    }
+    implementation(libs.androidx.activity.compose){
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx") // Here we are exlcuding the ViewModel dependency
+    }
+    implementation(libs.navigation.compose){
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx") // Here we are exlcuding the ViewModel dependency
+    }
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
@@ -73,6 +83,8 @@ dependencies {
 
     // Jetpack Compose Integration
     //noinspection GradleDependency
-    implementation ("androidx.navigation:navigation-compose:$nav_version")
+//    implementation ("androidx.navigation:navigation-compose:$nav_version"){
+//        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx") // Here we are exlcuding the ViewModel dependency
+//    }
 
 }
