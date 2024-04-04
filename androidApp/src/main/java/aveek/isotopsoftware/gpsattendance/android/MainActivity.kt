@@ -53,6 +53,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         setContent {
             val data = viewModel.check()
+            // Todo : call api
             GPSAttendanceTheme {
                 Scaffold(
                     content = {
