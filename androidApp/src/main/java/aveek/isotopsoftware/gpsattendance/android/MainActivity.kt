@@ -38,6 +38,8 @@ import aveek.isotopsoftware.gpsattendance.android.presentation.components.profil
 import aveek.isotopsoftware.gpsattendance.android.presentation.theme.GPSAttendanceTheme
 import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
+import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
+import aveek.isotopsoftware.gpsattendance.domain.actions.AuthEvents
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
@@ -84,6 +86,9 @@ class MainActivity : ComponentActivity(), KoinComponent {
                             composable(Screens.LoginScreen.route) {
                                 LoginScreen(
                                     onLoginClick = {
+                                        val account = viewModel.action(AuthEvents.loginEvent(
+                                            AuthCredentials(username = "kminchelle", password = "0lelplR")
+                                        ))
 //                                        val data = greeting.data
 //                                        Log.d("rees", data)
 //                                        viewModel.check()
