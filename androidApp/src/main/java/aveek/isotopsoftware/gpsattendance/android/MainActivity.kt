@@ -2,7 +2,6 @@ package aveek.isotopsoftware.gpsattendance.android
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -30,7 +29,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import aveek.isotopsoftware.gpsattendance.Greeting
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.LoginScreen
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.login.RegistrationScreen
@@ -40,11 +38,10 @@ import aveek.isotopsoftware.gpsattendance.android.presentation.util.Screens
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
 import aveek.isotopsoftware.gpsattendance.domain.actions.AuthEvents
+import aveek.isotopsoftware.gpsattendance.domain.states.AuthenticationState
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
-import org.koin.androidx.compose.koinViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
@@ -55,84 +52,72 @@ class MainActivity : ComponentActivity(), KoinComponent {
         super.onCreate(savedInstanceState)
         setContent {
             val data = viewModel.check()
-            // Todo : call api
             GPSAttendanceTheme {
-                Scaffold(
-                    content = {
-
-                        val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
-                        val topBarState = rememberSaveable { (mutableStateOf(true)) }
-                        val navController = rememberNavController()
-                        val navBackStackEntry by navController.currentBackStackEntryAsState()
-                        when (navBackStackEntry?.destination?.route) {
-                            Screens.LoginScreen.route -> {
-
-                            }
-
-                            Screens.RegistrationScreen.route -> {
-
-                            }
-
-                            Screens.ProfileScreen.route -> {
-                                bottomBarState.value = true
-                                topBarState.value = false
-                            }
-                        }
-
-                        NavHost(
-                            navController = navController,
-                            startDestination = Screens.LoginScreen.route
-                        ) {
-                            composable(Screens.LoginScreen.route) {
-                                LoginScreen(
-                                    onLoginClick = {
-                                        val account = viewModel.action(AuthEvents.loginEvent(
-                                            AuthCredentials(username = "kminchelle", password = "0lelplR")
-                                        ))
-//                                        val data = greeting.data
-//                                        Log.d("rees", data)
-//                                        viewModel.check()
-//                                        runBlocking {
-////                                            val data = AuthCredentials(username = "kminchelle", password = "0lelplR")
-////                                            val result = authRepo.fetchUser(data)
-////                                            Log.d("rees", result?.token?:"none found")
-//                                        }
-                                        navController.navigate(Screens.ProfileScreen.route) {
-                                            launchSingleTop = true
-                                        }
-                                    },
-                                    onRegistrationTabClick = {
-                                        navController.navigate(Screens.RegistrationScreen.route) {
-                                            launchSingleTop = true
-                                        }
-                                    },
-                                    onForgotPasswordClick = {},
-                                    contentPadding = PaddingValues(DimensionTokens.dimension40.dp)
-                                    )
-                            }
-                            composable(Screens.RegistrationScreen.route) {
-                                RegistrationScreen(
-                                    modifier = Modifier,
-                                    onRegistrationTabClick = { },
-                                    onLoginClick = {
-                                        navController.navigate(Screens.LoginScreen.route) {
-                                            launchSingleTop = true
-                                        }
-                                    }
-                                )
-                            }
-                            composable(Screens.ProfileScreen.route) {
-                                ProfileScreen(
-                                    onBackButtonClick = {
-                                        navController.popBackStack()
-                                    }
-                                )
-                            }
-                        }
-                    }
-                )
+                MainContent()
             }
         }
+    }
+
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+    @Composable
+    private fun MainContent() {
+        Scaffold(
+            content = {
+                val bottomBarState = rememberSaveable { (mutableStateOf(true)) }
+                val topBarState = rememberSaveable { (mutableStateOf(true)) }
+                val navController = rememberNavController()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                when (navBackStackEntry?.destination?.route) {
+                    Screens.LoginScreen.route -> {
+
+                    }
+
+                    Screens.RegistrationScreen.route -> {
+
+                    }
+
+                    Screens.ProfileScreen.route -> {
+                        bottomBarState.value = true
+                        topBarState.value = false
+                    }
+                }
+
+                NavHost(
+                    navController = navController,
+                    startDestination = Screens.LoginScreen.route
+                ) {
+                    composable(Screens.LoginScreen.route) {
+                        LoginScreen(
+                            contentPadding = PaddingValues(DimensionTokens.dimension40.dp),
+                            viewModel = viewModel,
+                            onRegistrationTabClick = {
+                                navController.navigate(Screens.RegistrationScreen.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                    composable(Screens.RegistrationScreen.route) {
+                        RegistrationScreen(
+                            modifier = Modifier,
+                            onRegistrationTabClick = { },
+                            onLoginClick = {
+                                navController.navigate(Screens.LoginScreen.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                    composable(Screens.ProfileScreen.route) {
+                        ProfileScreen(
+                            onBackButtonClick = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
+                }
+            }
+        )
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -153,12 +138,7 @@ class MainActivity : ComponentActivity(), KoinComponent {
             val interactionSource = remember { MutableInteractionSource() }
             val isRegistrationPressed by interactionSource.collectIsPressedAsState()
 
-            LoginScreen(insets,modifier,
-                onForgotPasswordClick = {},
-                onLoginClick = {},
-                onRegistrationTabClick = {
-                }
-            )
+            LoginScreen(insets,modifier, viewModel, onRegistrationTabClick = {})
         }
 
     }
@@ -173,8 +153,8 @@ class MainActivity : ComponentActivity(), KoinComponent {
     @Composable
     fun DefaultPreview() {
         GPSAttendanceTheme(darkTheme = true) {
-            CoreScreen(PaddingValues(DimensionTokens.dimension4.dp), false, modifier = Modifier)
-//        GreetingView("Hello, Android!")
+            MainContent()
+//            CoreScreen(PaddingValues(DimensionTokens.dimension4.dp), false, modifier = Modifier)
         }
     }
 }

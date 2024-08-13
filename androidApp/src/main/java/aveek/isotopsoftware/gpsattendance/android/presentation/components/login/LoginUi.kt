@@ -40,11 +40,22 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.text.TextFields
 import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
+import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
+import aveek.isotopsoftware.gpsattendance.domain.actions.AuthEvents
+import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
+import org.koin.androidx.compose.getViewModel
+
+@Preview
+@Composable
+fun PreviewLoginScreen(){
+    LoginScreen(contentPadding = PaddingValues(24.dp), viewModel = getViewModel(), onRegistrationTabClick = {})
+}
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,9 +63,8 @@ import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 fun LoginScreen(
     contentPadding: PaddingValues,
     modifier: Modifier = Modifier,
-    onForgotPasswordClick: () -> Unit,
-    onRegistrationTabClick: () -> Unit,
-    onLoginClick: () -> Unit
+    viewModel: AuthenticationViewModel,
+    onRegistrationTabClick : ()-> Unit
 ) {
     Scaffold(
         topBar = {
@@ -85,10 +95,10 @@ fun LoginScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
                     var emailText by remember {
-                        mutableStateOf("")
+                        mutableStateOf("kminchelle")
                     }
                     var passwordText by remember {
-                        mutableStateOf("")
+                        mutableStateOf("0lelplR")
                     }
 
                     TextFields(
@@ -149,14 +159,18 @@ fun LoginScreen(
                             text = "Forgot Password?",
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.clickable { onForgotPasswordClick.invoke() })
+                            modifier = Modifier.clickable {
+                                viewModel.action(events = AuthEvents.forgotPasswordEvent)
+                            })
                     }
 
                     Spacer(modifier = modifier.size(DimensionTokens.dimension16.dp))
 
                     Row {
                         Button(
-                            onClick = { onLoginClick.invoke() },
+                            onClick = {
+                                viewModel.action(AuthEvents.loginEvent(AuthCredentials(emailText,passwordText)))
+                                      },
                             modifier = Modifier.fillMaxWidth(),
                             shape = RoundedCornerShape(10.dp)
                         ) {
