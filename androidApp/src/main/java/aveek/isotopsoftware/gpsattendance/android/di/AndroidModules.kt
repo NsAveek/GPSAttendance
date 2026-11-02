@@ -2,7 +2,7 @@ package aveek.isotopsoftware.gpsattendance.android.di
 
 import aveek.isotopsoftware.gpsattendance.domain.usecases.AuthenticationUseCase
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 
