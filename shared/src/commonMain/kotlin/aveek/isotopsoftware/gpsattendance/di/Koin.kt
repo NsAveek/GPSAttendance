@@ -6,16 +6,24 @@ import aveek.isotopsoftware.gpsattendance.domain.repository.AuthRepo
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration = {}) = org.koin.core.context.startKoin {
+/**
+ * Starts Koin with the shared modules.
+ * @param enableNetworkLogs pass true only in debug builds.
+ */
+fun initKoin(
+    enableNetworkLogs: Boolean = false,
+    appDeclaration: KoinAppDeclaration = {},
+) = org.koin.core.context.startKoin {
     appDeclaration()
-    modules(appModule())
+    modules(appModule(enableNetworkLogs))
 }
 
-fun appModule() = listOf(commonModule, dataSourceModule)
+fun appModule(enableNetworkLogs: Boolean = false) =
+    listOf(commonModule, dataSourceModule(enableNetworkLogs))
 
 val commonModule = module { /*Add necessary modules*/ }
-val dataSourceModule = module {
-    single { ApiService() }
+fun dataSourceModule(enableNetworkLogs: Boolean) = module {
+    single { ApiService(enableLogging = enableNetworkLogs) }
     single { AuthApi(get()) }
     single<AuthRepo> { AuthRepoImpl(get()) }
 }

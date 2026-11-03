@@ -50,7 +50,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val data = viewModel.check()
             GPSAttendanceTheme {
                 MainContent()
             }
@@ -142,11 +141,6 @@ class MainActivity : ComponentActivity() {
 
     }
 
-
-    @Composable
-    fun GreetingView(text: String) {
-        Text(text = text)
-    }
 
     @Preview
     @Composable

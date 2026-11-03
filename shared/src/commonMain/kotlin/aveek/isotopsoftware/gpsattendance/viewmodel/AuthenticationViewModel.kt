@@ -40,6 +40,5 @@ open class AuthenticationViewModel ( val authenticationUseCase: AuthenticationUs
             AuthEvents.forgotPasswordEvent -> TODO()
         }
     }
-    fun check(): String = "Hi"
 
 }

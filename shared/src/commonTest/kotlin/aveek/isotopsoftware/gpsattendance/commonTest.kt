@@ -19,7 +19,8 @@ class ResultTest {
     @Test
     fun mapKeepsError() {
         val error = IllegalStateException("boom")
-        val mapped = (Result.Error(error) as Result<Int>).map { it * 10 }
+        val result: Result<Int> = Result.Error(error)
+        val mapped = result.map { it * 10 }
         assertIs<Result.Error>(mapped)
         assertEquals(error, mapped.throwable)
     }
