@@ -21,7 +21,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalMinimumInteractiveComponentEnforcement
+import androidx.compose.material3.LocalMinimumInteractiveComponentSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -41,6 +41,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import aveek.isotopsoftware.gpsattendance.android.R
 import aveek.isotopsoftware.gpsattendance.android.presentation.components.compose.CustomTopAppBar
@@ -49,12 +50,12 @@ import aveek.isotopsoftware.gpsattendance.common.DimensionTokens
 import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
 import aveek.isotopsoftware.gpsattendance.domain.actions.AuthEvents
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Preview
 @Composable
 fun PreviewLoginScreen(){
-    LoginScreen(contentPadding = PaddingValues(24.dp), viewModel = getViewModel(), onRegistrationTabClick = {})
+    LoginScreen(contentPadding = PaddingValues(24.dp), viewModel = koinViewModel(), onRegistrationTabClick = {})
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -143,7 +144,7 @@ fun LoginScreen(
                         modifier = Modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
+                        CompositionLocalProvider(LocalMinimumInteractiveComponentSize provides Dp.Unspecified) {
                             Checkbox(checked = false, onCheckedChange = {
 
                             })

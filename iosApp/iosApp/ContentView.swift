@@ -2,10 +2,9 @@ import SwiftUI
 import shared
 
 struct ContentView: View {
-	let greet = Greeting().greet()
-
 	var body: some View {
-		Text(greet)
+		// Placeholder until the SwiftUI screens are built on the shared MVI ViewModels (Phase 6)
+		Text("GPS Attendance")
 	}
 }
 

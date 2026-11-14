@@ -40,18 +40,16 @@ import aveek.isotopsoftware.gpsattendance.data.model.AuthCredentials
 import aveek.isotopsoftware.gpsattendance.domain.actions.AuthEvents
 import aveek.isotopsoftware.gpsattendance.domain.states.AuthenticationState
 import aveek.isotopsoftware.gpsattendance.viewmodel.AuthenticationViewModel
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalFoundationApi
 @ExperimentalAnimationApi
-class MainActivity : ComponentActivity(), KoinComponent {
-    protected val viewModel: AuthenticationViewModel by inject()
+class MainActivity : ComponentActivity() {
+    private val viewModel: AuthenticationViewModel by viewModel()
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val data = viewModel.check()
             GPSAttendanceTheme {
                 MainContent()
             }
@@ -143,11 +141,6 @@ class MainActivity : ComponentActivity(), KoinComponent {
 
     }
 
-
-    @Composable
-    fun GreetingView(text: String) {
-        Text(text = text)
-    }
 
     @Preview
     @Composable

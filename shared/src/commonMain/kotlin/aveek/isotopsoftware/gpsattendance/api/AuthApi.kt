@@ -10,22 +10,18 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.RedirectResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.request.post
+import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import io.ktor.util.InternalAPI
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class AuthApi(private val client: ApiService) : AuthRepo {
     // TODO : Have an extension function to generalize exception handling
     // TODO : Add Result class instead of Account
-    @OptIn(InternalAPI::class)
     override suspend fun fetchUser(authCredentials: AuthCredentials): Account? {
-        val jsonBody = Json.encodeToString(authCredentials)
         return try {
             client.client.post(urlString = GetAccount) {
                 contentType(ContentType.Application.Json)
-                body = jsonBody
+                setBody(authCredentials)
             }.body<Account>()
         } catch (e : RedirectResponseException){
             return null

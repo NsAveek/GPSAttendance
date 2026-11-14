@@ -31,8 +31,8 @@ open class AuthenticationViewModel ( val authenticationUseCase: AuthenticationUs
                         _authenticationState.update {
                             AuthenticationState.Success(account.email)
                         }
-                    }?:_authenticationState.update {
-                        AuthenticationState.Success("none@none.com")
+                    } ?: _authenticationState.update {
+                        AuthenticationState.Error("Login failed")
                     }
                 }
             }
@@ -40,6 +40,5 @@ open class AuthenticationViewModel ( val authenticationUseCase: AuthenticationUs
             AuthEvents.forgotPasswordEvent -> TODO()
         }
     }
-    fun check(): String = "Hi"
 
 }
